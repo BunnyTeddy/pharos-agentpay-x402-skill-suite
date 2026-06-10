@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.vitest/
+.env
+.env.*
+!.env.example
+.private_key
+*.log
+.DS_Store
