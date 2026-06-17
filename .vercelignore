@@ -1,0 +1,9 @@
+.git
+node_modules
+dist
+.env
+.env.*
+.DS_Store
+coverage
+presentation-video/node_modules
+presentation-video/out

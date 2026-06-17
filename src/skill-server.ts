@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request } from "express";
 import { existsSync } from "node:fs";
 import type { Server } from "node:http";
 import path from "node:path";
@@ -7,8 +7,13 @@ import type { AgentPayConfig } from "./config.js";
 import { decodePaymentReceiptHeader, discoverPayment, payFetch, skillCatalog } from "./skills.js";
 import { DecodeReceiptInputSchema } from "./types.js";
 
-export function buildSkillServerApp(config: AgentPayConfig): Express {
+export interface SkillServerAppOptions {
+  getDemoApiBaseUrl?: (req: Request) => string;
+}
+
+export function buildSkillServerApp(config: AgentPayConfig, options: SkillServerAppOptions = {}): Express {
   const app = express();
+  app.set("trust proxy", true);
   app.use(express.json({ limit: "1mb" }));
 
   app.get("/", (_req, res) => {
@@ -21,7 +26,7 @@ export function buildSkillServerApp(config: AgentPayConfig): Express {
 
   app.get("/studio/config", (req, res) => {
     const origin = `${req.protocol}://${req.get("host")}`;
-    const demoApiBaseUrl = `http://localhost:${config.demoApiPort}`;
+    const demoApiBaseUrl = options.getDemoApiBaseUrl?.(req) || `http://localhost:${config.demoApiPort}`;
     res.json({
       name: "AgentPay Studio",
       description: "Web control center for AI agents buying x402-protected APIs on Pharos.",
