@@ -6,6 +6,7 @@ Reusable **Skill Suite for AI Agents to pay for HTTP APIs with x402 on Pharos**.
 - Payment rail: x402 over HTTP 402 Payment Required
 - Network default: Pharos Atlantic Testnet, `eip155:688689`
 - Demo modes: reliable local mock mode + real Pharos testnet mode when wallet/facilitator/token env is available
+- Product UI: **AgentPay Studio** web dashboard for judges to run the agent payment workflow visually
 
 References: [Pharos x402 docs](https://docs.pharosnetwork.xyz/resources/x402), [Pharos network info](https://docs.pharosnetwork.xyz/network-overview/pharos-networks), [x402](https://github.com/coinbase/x402).
 
@@ -14,6 +15,7 @@ References: [Pharos x402 docs](https://docs.pharosnetwork.xyz/resources/x402), [
 ```mermaid
 flowchart LR
   A["AI Agent / Workflow"] --> B["AgentPay Skill HTTP API"]
+  S["AgentPay Studio Web UI"] --> B
   B --> C["discover_paid_resource"]
   B --> D["pay_fetch"]
   D --> E["x402 protected API"]
@@ -70,10 +72,34 @@ The mock demo starts a demo paid API and the Skill HTTP server on random local p
 5. Demo API returns premium data plus a `PAYMENT-RESPONSE` receipt.
 6. Demo repeats the same idempotency key to prove no duplicate mock charge is created.
 
+## AgentPay Studio web UI
+
+Run the full local product demo with one command:
+
+```bash
+npm run studio
+```
+
+Then open:
+
+```text
+http://localhost:4020/studio/
+```
+
+AgentPay Studio starts the Skill server on `4020` and the paid demo API on `4021`, then gives judges a visual workflow:
+
+- choose the paid RWA alpha or research summarizer endpoint;
+- click **Discover 402** to inspect x402 payment requirements;
+- set `maxUsd` and an idempotency key;
+- click **Pay & fetch** to unlock premium data;
+- inspect the normalized receipt in the Receipt Vault.
+
 ## CLI usage
 
 ```bash
 npm run agentpay -- catalog
+npm run studio
+npm run agentpay -- studio --mode mock --skill-port 4020 --demo-port 4021
 npm run agentpay -- demo --mode mock
 npm run agentpay -- serve-skills --mode mock --port 4020
 npm run agentpay -- serve-demo-api --mode mock --port 4021

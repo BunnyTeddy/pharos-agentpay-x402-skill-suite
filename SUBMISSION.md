@@ -18,10 +18,13 @@ AgentPay packages the payment flow as composable skills:
 
 The repo includes a demo paid API with RWA alpha and research summarization endpoints, plus an optional facilitator for real Pharos testnet settlement.
 
+It also includes **AgentPay Studio**, a web UI that turns the backend Skill Suite into a judge-friendly product demo: endpoint picker, Discover 402, budget guard, Pay & Fetch, receipt vault, skill catalog, and live agent trace.
+
 ## Hackathon judging alignment
 
 - **Originality**: packages x402 as an agent-callable Skill Suite, not just a paid API demo.
 - **Technical quality**: TypeScript ESM, zod schemas, tests, CLI, HTTP API, mock and real modes.
+- **Product completeness**: AgentPay Studio gives the Skill Suite a polished web interface for live demos.
 - **Practical use case**: autonomous agents can buy premium RWA/research data.
 - **Reusability**: HTTP + CLI interfaces work with any agent framework.
 - **Composability**: receipts can feed future Agent Arena workflows such as reputation, escrow, or paid research agents.
@@ -30,11 +33,11 @@ The repo includes a demo paid API with RWA alpha and research summarization endp
 ## Demo script, 90–120 seconds
 
 1. “This is Pharos AgentPay, a reusable x402 Skill Suite for AI agents.”
-2. Show `npm run demo:mock`.
-3. Explain: “The demo starts a paid API and the Skill HTTP server. The agent asks for RWA alpha.”
-4. Point to the first 402 result: “The API refuses access and sends x402 payment requirements.”
-5. Point to the successful result: “The Skill creates a payment payload, retries the request, and receives premium data plus a receipt.”
-6. Point to `mockLedger.chargeCount`: “The same idempotency key is retried without creating a duplicate charge.”
+2. Show `npm run studio` and open `http://localhost:4020/studio/`.
+3. Explain: “The Studio starts a paid API and the Skill HTTP server. The agent asks for RWA alpha.”
+4. Click “Discover 402”: “The API refuses access and sends x402 payment requirements.”
+5. Click “Pay & fetch”: “The Skill creates a payment payload, retries the request, and receives premium data plus a receipt.”
+6. Point to the Receipt Vault and idempotency key: “Receipts are normalized for agent memory/audit and retries are safe.”
 7. Show README real-mode commands: “With `EVM_PRIVATE_KEY`, `PAY_TO_ADDRESS`, and `FACILITATOR_URL`, the same Skill uses Pharos testnet x402 settlement.”
 8. Close: “For Phase 2, this becomes a paid Research Agent or Agent-to-Agent commerce primitive.”
 
@@ -44,6 +47,7 @@ The repo includes a demo paid API with RWA alpha and research summarization endp
 npm install
 npm run build
 npm test
+npm run studio
 npm run demo:mock
 ```
 

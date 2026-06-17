@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgentPay Studio — Pharos x402</title>
+    <meta
+      name="description"
+      content="AgentPay Studio is a polished web UI for AI agents to discover and pay for x402 APIs on Pharos."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="studio-shell">
+      <aside class="sidebar" aria-label="AgentPay Studio navigation">
+        <div class="brand-block">
+          <a class="brand" href="#top" aria-label="AgentPay Studio home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img">
+                <path d="M24 5 43 38 24 32 5 38 24 5Z" fill="url(#logoA)" />
+                <path d="M24 13 35 32 24 28 13 32 24 13Z" fill="#061629" opacity=".72" />
+                <path d="M24 5v27L5 38 24 5Z" fill="#79f7ff" opacity=".38" />
+                <defs>
+                  <linearGradient id="logoA" x1="9" x2="41" y1="6" y2="39">
+                    <stop stop-color="#7dd3fc" />
+                    <stop offset=".46" stop-color="#22d3ee" />
+                    <stop offset="1" stop-color="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span>
+              <strong>AgentPay Studio</strong>
+              <small>v1.0.0-alpha</small>
+            </span>
+          </a>
+        </div>
+
+        <nav class="nav-links">
+          <a href="#builder" class="active"><span class="nav-icon">⌘</span>Skills</a>
+          <a href="#demo-api"><span class="nav-icon">&lt;/&gt;</span>Demo API</a>
+          <a href="#receipt"><span class="nav-icon">▤</span>Receipts</a>
+          <a href="#settings"><span class="nav-icon">⚙</span>Settings</a>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <section class="wallet-card" aria-label="Mock wallet">
+          <p class="eyebrow">Wallet</p>
+          <div class="wallet-address">
+            <span>0xA7b8…C4dE</span>
+            <button class="icon-button mini" type="button" title="Copy wallet">⧉</button>
+          </div>
+          <div class="wallet-row">
+            <span>Balance</span>
+            <strong>12.8042 USDC</strong>
+          </div>
+          <button class="button outline full" type="button">Disconnect</button>
+        </section>
+      </aside>
+
+      <main id="top" class="workspace">
+        <header class="topbar">
+          <div class="topbar-left">
+            <span class="hairline"></span>
+          </div>
+          <div class="topbar-actions">
+            <span class="status-pill" id="skillStatus"><i></i>Skill API live</span>
+            <span class="network-pill"><i></i><strong>Pharos</strong><span id="sidebarNetwork">eip155:688689</span></span>
+            <label class="mode-control" aria-label="Payment mode">
+              <span>◇</span>
+              <select id="modeInput" name="mode">
+                <option value="mock">Mock Mode</option>
+                <option value="real">Real Mode</option>
+              </select>
+            </label>
+            <button class="button subtle" id="refreshButton" type="button">Refresh</button>
+          </div>
+        </header>
+
+        <section class="content-grid">
+          <div class="main-column">
+            <section class="hero-panel" id="builder">
+              <div class="hero-title">
+                <p class="eyebrow">Pharos Agent Carnival · Phase 1</p>
+                <h1>Pharos x402 Skill Suite</h1>
+                <p>Pay & Fetch RWA Alpha</p>
+              </div>
+
+              <div class="flow-steps" aria-label="x402 payment workflow">
+                <article class="flow-step" data-step="discover">
+                  <span class="step-number">1</span>
+                  <span class="step-icon globe" aria-hidden="true">
+                    <svg viewBox="0 0 96 96" focusable="false">
+                      <circle cx="48" cy="48" r="34" />
+                      <path d="M14 48h68M48 14c13 12 19 23 19 34s-6 22-19 34M48 14C35 26 29 37 29 48s6 22 19 34M48 14v68" />
+                    </svg>
+                  </span>
+                  <strong>Discover 402</strong>
+                  <small>Agent discovers endpoint that requires payment.</small>
+                  <div class="step-footer"><span>Ready</span><em>—</em></div>
+                </article>
+                <article class="flow-step purple" data-step="payment">
+                  <span class="step-number">2</span>
+                  <span class="step-icon shield" aria-hidden="true">
+                    <svg viewBox="0 0 96 96" focusable="false">
+                      <path d="M48 10 77 22v25c0 20-12 33-29 42-17-9-29-22-29-42V22l29-12Z" />
+                      <circle cx="44" cy="48" r="10" />
+                      <path d="M52 56 66 70M61 65l7-7" />
+                    </svg>
+                  </span>
+                  <strong>Sign Payment</strong>
+                  <small>Agent signs and submits x402 payment.</small>
+                  <div class="step-footer"><span>Ready</span><em>—</em></div>
+                </article>
+                <article class="flow-step" data-step="data">
+                  <span class="step-number">3</span>
+                  <span class="step-icon server" aria-hidden="true">
+                    <svg viewBox="0 0 96 96" focusable="false">
+                      <rect x="18" y="18" width="60" height="18" rx="7" />
+                      <rect x="18" y="39" width="60" height="18" rx="7" />
+                      <rect x="18" y="60" width="60" height="18" rx="7" />
+                      <path d="M31 27h1M31 48h1M31 69h1" />
+                    </svg>
+                  </span>
+                  <strong>Fetch Data</strong>
+                  <small>Server verifies payment and returns data.</small>
+                  <div class="step-footer"><span>Ready</span><em>—</em></div>
+                </article>
+                <article class="flow-step green" data-step="receipt">
+                  <span class="step-number">4</span>
+                  <span class="step-icon receipt" aria-hidden="true">
+                    <svg viewBox="0 0 96 96" focusable="false">
+                      <path d="M27 12h28l16 16v56H27V12Z" />
+                      <path d="M55 12v18h16M38 45h20M38 58h20M38 71h13" />
+                    </svg>
+                  </span>
+                  <strong>Receipt</strong>
+                  <small>Agent receives verifiable payment receipt.</small>
+                  <div class="step-footer"><span>Ready</span><em>—</em></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="endpoint-card" id="demo-api">
+              <div class="endpoint-main">
+                <div class="field-head">
+                  <p class="eyebrow">Skill endpoint</p>
+                  <button class="icon-button" type="button" title="Copy endpoint">⧉</button>
+                </div>
+                <input id="urlInput" name="url" type="url" required value="http://localhost:4021/alpha/rwa" />
+
+                <div class="meta-grid">
+                  <div><span>Method</span><strong id="methodPreview">GET</strong></div>
+                  <div><span>Requires</span><strong>x402 Payment</strong></div>
+                  <div><span>Price</span><strong id="pricePreview">0.003 USDC</strong></div>
+                  <div><span>Network</span><strong id="networkValue">eip155:688689</strong></div>
+                </div>
+              </div>
+
+              <aside class="http-card">
+                <p class="eyebrow">HTTP response</p>
+                <strong id="responseStatus">HTTP 402</strong>
+                <span id="flowSummary">Payment Required</span>
+                <p>Server enforces x402 payment for this resource.</p>
+                <button class="button outline tiny" id="discoverButton" type="button">View Headers</button>
+              </aside>
+            </section>
+
+            <section class="payment-card">
+              <form id="requestForm" class="payment-form">
+                <div class="pay-box">
+                  <p class="eyebrow">Payment amount</p>
+                  <div class="amount-line"><span class="coin">$</span><strong id="payAmountPreview">0.003</strong><em>USDC</em></div>
+                </div>
+                <div class="form-controls">
+                  <label>
+                    Resource
+                    <select id="resourceSelect" name="resource">
+                      <option value="rwa-alpha">RWA Alpha Signal · GET · 0.003 USDC</option>
+                      <option value="research-summary">Research Summarizer · POST · 0.005 USDC</option>
+                      <option value="custom">Custom x402 URL</option>
+                    </select>
+                  </label>
+                  <label>
+                    Method
+                    <select id="methodInput" name="method">
+                      <option>GET</option>
+                      <option>POST</option>
+                      <option>PUT</option>
+                      <option>PATCH</option>
+                      <option>DELETE</option>
+                      <option>HEAD</option>
+                    </select>
+                  </label>
+                  <label>
+                    Max USD
+                    <input id="maxUsdInput" name="maxUsd" type="number" min="0.000001" step="0.000001" value="0.01" />
+                  </label>
+                  <label>
+                    Idempotency key
+                    <span class="inline-input">
+                      <input id="idempotencyInput" name="idempotencyKey" type="text" value="studio-rwa-001" />
+                      <button id="newKeyButton" class="icon-button" type="button" title="Generate a new key">↻</button>
+                    </span>
+                  </label>
+                  <label id="bodyField" class="body-field hidden">
+                    JSON body
+                    <textarea id="bodyInput" name="body" rows="5">{
+  "prompt": "Summarize why x402 matters for Pharos AI agents"
+}</textarea>
+                  </label>
+                </div>
+                <button class="button primary pay-button" id="payFetchButton" type="submit">Pay with x402 <span>→</span></button>
+                <div class="payment-status">
+                  <p class="eyebrow">Status</p>
+                  <strong id="receiptSubValue">Waiting for payment</strong>
+                  <span id="receiptValue">No payment yet</span>
+                </div>
+              </form>
+            </section>
+
+            <section class="data-panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Premium response</p>
+                  <h2>Agent-readable data</h2>
+                </div>
+                <button class="button subtle tiny" id="runDemoButton" type="button">Run Demo</button>
+              </div>
+              <div id="dataPreview" class="data-preview empty-state">
+                <strong>No paid data yet.</strong>
+                <span>Click “Pay with x402” to unlock the protected RWA alpha payload.</span>
+              </div>
+              <pre id="responseJson" class="code-block">{}</pre>
+            </section>
+          </div>
+
+          <aside class="receipt-column" id="receipt">
+            <section class="receipt-panel">
+              <div class="receipt-head">
+                <h2>Payment Receipt</h2>
+                <span id="receiptMode" class="verified-badge">Pending</span>
+              </div>
+              <pre id="receiptJson" class="code-block receipt-code">{}</pre>
+              <dl class="receipt-list">
+                <div><dt>Transaction</dt><dd id="receiptTx">—</dd></div>
+                <div><dt>Network</dt><dd id="receiptNetwork">—</dd></div>
+                <div><dt>Payer</dt><dd id="receiptPayer">—</dd></div>
+                <div><dt>Amount</dt><dd id="receiptAmount">—</dd></div>
+              </dl>
+              <footer class="receipt-footer">
+                <span>🛡 Receipt verified by Pharos</span>
+                <button class="button outline tiny" id="decodeButton" type="button">Decode Receipt</button>
+              </footer>
+            </section>
+
+            <section class="side-panel" id="catalog">
+              <div class="section-head compact">
+                <div>
+                  <p class="eyebrow">Reusable skills</p>
+                  <h2>Catalog</h2>
+                </div>
+                <button class="button subtle tiny" id="loadCatalogButton" type="button">Load</button>
+              </div>
+              <div id="skillsCatalog" class="skill-list"></div>
+            </section>
+
+            <section class="side-panel" id="settings">
+              <div class="section-head compact">
+                <div>
+                  <p class="eyebrow">Live console</p>
+                  <h2>Agent trace</h2>
+                </div>
+                <button class="button subtle tiny" id="clearLogButton" type="button">Clear</button>
+              </div>
+              <ol id="eventLog" class="event-log" aria-live="polite"></ol>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

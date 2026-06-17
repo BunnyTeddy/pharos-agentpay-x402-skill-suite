@@ -1,0 +1,65 @@
+[
+  {
+    "text": "Pharos AgentPay x402 Skill Suite\nAI agents can pay for APIs on Pharos.",
+    "startMs": 0,
+    "endMs": 6000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Agents need paid data without accounts,\nAPI keys, cards, or manual approval.",
+    "startMs": 6000,
+    "endMs": 14000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "AgentPay packages the flow as reusable skills:\ndiscover, pay-fetch, and decode receipt.",
+    "startMs": 14000,
+    "endMs": 23000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Studio or any agent calls the Skill API,\nwhich negotiates x402 with protected resources.",
+    "startMs": 23000,
+    "endMs": 34000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "First, the endpoint returns HTTP 402\nwith Pharos payment requirements.",
+    "startMs": 34000,
+    "endMs": 50000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Then pay-fetch checks the budget,\nsigns a payment payload, and retries.",
+    "startMs": 50000,
+    "endMs": 66000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Premium RWA data comes back with a normalized receipt\nand idempotent retry safety.",
+    "startMs": 66000,
+    "endMs": 78000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "Real mode swaps the mock ledger for wallet,\nfacilitator, and Pharos Atlantic Testnet settlement.",
+    "startMs": 78000,
+    "endMs": 86000,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "AgentPay is a payment primitive\nfor agent-to-agent commerce.",
+    "startMs": 86000,
+    "endMs": 90000,
+    "timestampMs": null,
+    "confidence": null
+  }
+]

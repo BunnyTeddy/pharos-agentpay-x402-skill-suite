@@ -39,6 +39,26 @@ async function main(argv = process.argv.slice(2)): Promise<boolean> {
       console.log(JSON.stringify({ ok: true, service: "facilitator", mode: serverConfig.mode, url }, null, 2));
       return true;
     }
+    case "studio":
+    case "serve-studio": {
+      const skillPort = flagNumber(flags, "skill-port") || flagNumber(flags, "port") || config.skillPort;
+      const demoApiPort = flagNumber(flags, "demo-port") || config.demoApiPort;
+      const serverConfig = { ...config, skillPort, demoApiPort };
+      const [demoApi, skillServer] = await Promise.all([
+        listenDemoApi(serverConfig, serverConfig.mode),
+        listenSkillServer(serverConfig),
+      ]);
+      console.log(JSON.stringify({
+        ok: true,
+        service: "studio",
+        mode: serverConfig.mode,
+        studioUrl: `${skillServer.url}/studio/`,
+        skillServer: skillServer.url,
+        demoApi: demoApi.url,
+        note: "Open studioUrl in your browser. Keep this process running.",
+      }, null, 2));
+      return true;
+    }
     case "discover": {
       const url = positional[0];
       if (!url) throw new Error("Usage: agentpay discover <url> [--method GET]");
@@ -213,6 +233,7 @@ Commands:
   agentpay serve-skills [--mode mock|real] [--port 4020]
   agentpay serve-demo-api [--mode mock|real] [--port 4021]
   agentpay serve-facilitator [--mode mock|real] [--port 4023]
+  agentpay studio [--mode mock|real] [--skill-port 4020] [--demo-port 4021]
   agentpay discover <url> [--method GET]
   agentpay pay-fetch <url> --max-usd <amount> [--mode mock|real] [--method GET|POST] [--body '{"prompt":"..."}']
   agentpay demo [--mode mock|real]
